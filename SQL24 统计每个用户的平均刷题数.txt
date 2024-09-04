@@ -1,0 +1,15 @@
+select
+    up.university,
+    qd.difficult_level,
+    round(
+        count(qpd.question_id) / count(distinct qpd.device_id),
+        4
+    ) avg_answer_cnt
+from
+    user_profile up
+    join question_practice_detail qpd on up.device_id = qpd.device_id
+    join question_detail qd on qpd.question_id = qd.question_id
+where
+    up.university = '山东大学'
+group by
+    qd.difficult_level

@@ -1,0 +1,12 @@
+select
+    device_id,
+    age,
+    university
+from
+    user_profile
+    /*
+    _:匹配一个字符
+    %:匹配0个或多个字符
+     */
+where
+    university like '%北京%'

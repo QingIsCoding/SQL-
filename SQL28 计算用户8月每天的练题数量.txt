@@ -1,0 +1,10 @@
+select
+    day (date) day,
+    count(question_id) question_cnt
+from
+    question_practice_detail
+where
+    year (date) = 2021
+    and month (date) = 8
+group by
+    day

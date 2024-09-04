@@ -1,0 +1,6 @@
+select
+    device_id user_infos_example
+from
+    user_profile
+limit
+    2

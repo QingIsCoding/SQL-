@@ -1,0 +1,12 @@
+select
+    if (
+        age < 25
+        or age is null,
+        '25岁以下',
+        '25岁及以上'
+    ) age_cut,
+    count(device_id) number
+from
+    user_profile
+group by
+    age_cut

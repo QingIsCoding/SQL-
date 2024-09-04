@@ -1,0 +1,40 @@
+/*
+INSERT INTO question_practice_detail VALUES(1,2138,111,'wrong','2021-05-03');
+INSERT INTO question_practice_detail VALUES(2,3214,112,'wrong','2021-05-09');
+INSERT INTO question_practice_detail VALUES(3,3214,113,'wrong','2021-06-15');
+INSERT INTO question_practice_detail VALUES(4,6543,111,'right','2021-08-13');
+INSERT INTO question_practice_detail VALUES(5,2315,115,'right','2021-08-13');
+INSERT INTO question_practice_detail VALUES(6,2315,116,'right','2021-08-14');
+INSERT INTO question_practice_detail VALUES(7,2315,117,'wrong','2021-08-15');
+INSERT INTO question_practice_detail VALUES(8,3214,112,'wrong','2021-05-09');
+INSERT INTO question_practice_detail VALUES(9,3214,113,'wrong','2021-08-15');
+INSERT INTO question_practice_detail VALUES(10,6543,111,'right','2021-08-13');
+INSERT INTO question_practice_detail VALUES(11,2315,115,'right','2021-08-13');
+INSERT INTO question_practice_detail VALUES(12,2315,116,'right','2021-08-14');
+INSERT INTO question_practice_detail VALUES(13,2315,117,'wrong','2021-08-15');
+INSERT INTO question_practice_detail VALUES(14,3214,112,'wrong','2021-08-16');
+INSERT INTO question_practice_detail VALUES(15,3214,113,'wrong','2021-08-18');
+INSERT INTO question_practice_detail VALUES(16,6543,111,'right','2021-08-13');
+2-8,4-10,5-11,6-12,7-13,10-16共6个重复device_id
+去除重复的8,10,11,12,13,16 相当于一共16-6=10个device_id
+5->6,6->7,9->14,是满足条件的
+结果为3/10=0.3
+ */
+select
+    count(day2.device_id) / count(day1.device_id) avg_ret
+from
+    (
+        select distinct
+            device_id,
+            date
+        from
+            question_practice_detail
+    ) day1
+    left join (
+        select distinct
+            device_id,
+            date
+        from
+            question_practice_detail
+    ) day2 on day1.device_id = day2.device_id
+    and date_add(day1.date, interval 1 day) = day2.date

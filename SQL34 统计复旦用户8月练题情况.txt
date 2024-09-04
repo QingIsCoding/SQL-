@@ -1,0 +1,13 @@
+select
+    up.device_id,
+    university,
+    count(question_id) question_cnt,
+    sum(if (result = 'right', 1, 0)) right_question_cnt
+from
+    user_profile up
+    left join question_practice_detail qpd on up.device_id = qpd.device_id
+    and month (qpd.date) = 8
+where
+    university = '复旦大学'
+group by
+    up.device_id

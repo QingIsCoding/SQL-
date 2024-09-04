@@ -1,0 +1,11 @@
+select
+    qpd.device_id,
+    qpd.question_id,
+    qpd.result
+from
+    question_practice_detail qpd
+    #join默认被视为inner join
+    join user_profile up on qpd.device_id = up.device_id
+    and up.university = '浙江大学'
+order by
+    qpd.question_id

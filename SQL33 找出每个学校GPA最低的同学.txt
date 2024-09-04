@@ -1,0 +1,21 @@
+select
+    device_id,
+    university,
+    gpa
+from
+    (
+        select
+            device_id,
+            university,
+            gpa,
+            rank() over (
+                partition by
+                    university
+                order by
+                    gpa
+            ) rk
+        from
+            user_profile
+    ) ranked
+where
+    ranked.rk = 1

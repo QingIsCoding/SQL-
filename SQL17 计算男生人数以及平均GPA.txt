@@ -1,0 +1,8 @@
+select
+    count(id) male_num,
+    #round(column_name,decimals)
+    round(avg(gpa), 1) avg_gpa
+from
+    user_profile
+where
+    gender = 'male'
